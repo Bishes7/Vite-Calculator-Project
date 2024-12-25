@@ -1,0 +1,15 @@
+.wrapper {
+  background: linear-gradient(
+    rgba(255, 166, 0, 0.89),
+    rgba(128, 0, 128, 0.837)
+  );
+  min-height: 100vh;
+}
+.table {
+  --bs-table-bg: transparent;
+}
+.yuji-mai-regular {
+  font-family: "Yuji Mai", serif;
+  font-weight: 400;
+  font-style: normal;
+}
