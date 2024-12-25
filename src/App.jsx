@@ -7,6 +7,7 @@ const hrsPerWeek = 24 * 7;
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+  const ttlHr = taskList.reduce((acc, item) => acc + item.hours, 0);
 
   const addTaskList = (taskObj) => {
     const obj = {
@@ -14,6 +15,10 @@ function App() {
       id: randomIdGnerator(),
       type: "entry",
     };
+
+    if (ttlHr + taskObj.hours > hrsPerWeek) {
+      return alert("You cannot add more");
+    }
 
     setTaskList([...taskList, obj]);
   };
@@ -48,8 +53,6 @@ function App() {
       setTaskList(taskList.filter((item) => item.id !== id));
     }
   };
-
-  const ttlHr = taskList.reduce((acc, item) => acc + item.hours, 0);
 
   return (
     <div className="wrapper pt-5">

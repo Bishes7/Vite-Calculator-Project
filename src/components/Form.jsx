@@ -7,7 +7,7 @@ const Form = ({ addTaskList }) => {
     const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: value,
+      [name]: name === "hours" ? +value : value,
     });
   };
 
