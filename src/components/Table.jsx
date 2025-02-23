@@ -10,13 +10,29 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
       <div className="col-md text-center">
         <h3>Entry List</h3>
         <hr />
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value=""
+          id="entry-list"
+        />
+        <label htmlFor="entry-list">Select All</label>
+
         <table className="table table-striped table-hover border shadow-lg">
           <tbody id="entryList">
             {entryList.map((item, i) => {
               return (
                 <tr key={item?._id}>
                   <td>{i + 1}</td>
-                  <td>{item.task}</td>
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <input
+                        className="form-check-input me-2"
+                        type="checkbox"
+                      />
+                      {item.task}
+                    </div>
+                  </td>
                   <td>{item.hours}</td>
                   <td className="text-end">
                     <button
@@ -41,13 +57,28 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
       <div className="col text-center">
         <h3>Bad List</h3>
         <hr />
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value=""
+          id="bad-list"
+        />
+        <label htmlFor="bad-list">Select All</label>
         <table className="table table-striped table-hover border shadow-lg">
           <tbody id="badlist">
             {badList.map((item, i) => {
               return (
                 <tr key={item._id}>
                   <td>{i + 1}</td>
-                  <td>{item.task}</td>
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <input
+                        className="form-check-input me-2"
+                        type="checkbox"
+                      />
+                      {item.task}
+                    </div>
+                  </td>
                   <td>{item.hours}</td>
                   <td className="text-end">
                     <button
