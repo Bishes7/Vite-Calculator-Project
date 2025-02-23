@@ -18,7 +18,6 @@ const Form = ({ addTaskList }) => {
   return (
     <form
       onSubmit={handleOnSubmit}
-      action="javascript:void(0)"
       className="border p-5 rounded-5 shadow-lg mt-5"
     >
       <div className="row g-2">
