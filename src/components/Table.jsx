@@ -10,22 +10,36 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
 
   const handleOnSelect = (e) => {
     const { checked, value } = e.target;
+    // create a temporary  array
+    let temArray = [];
+    if (value === "allEntry") {
+      temArray = entryList;
+    }
 
-    //  Entry List
+    if (value === "allBad") {
+      temArray = badList;
+    }
+
+    //  Implementng conditions
     if (checked) {
-      if (value === "allEntry") {
-        // get all ids from entrylist
+      if (value === "allEntry" || value === "allBad") {
+        // get all ids from entrylist or badlist
 
-        const ids = entryList.map((item) => item._id);
-        setToDelete([...toDelete, ...ids]);
+        const ids = temArray.map((item) => item._id);
+
+        // Condition to remove a dublicate id
+
+        const uniqueIds = [...new Set([...toDelete, ...ids])];
+
+        setToDelete(uniqueIds);
         return;
       }
 
       setToDelete([...toDelete, value]);
     } else {
       // Not checked
-      if (value === "allEntry") {
-        const ids = entryList.map((item) => item._id);
+      if (value === "allEntry" || value === "allBad") {
+        const ids = temArray.map((item) => item._id);
 
         const deletedEntry = toDelete.filter((_id) => !ids.includes(_id));
         setToDelete(deletedEntry);
@@ -34,25 +48,6 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
       setToDelete(toDelete.filter((_id) => _id !== value));
     }
     // console.log(checked, value);
-
-    //  Bad List
-
-    if (checked) {
-      if (value === "allBad") {
-        const badIds = badList.map((item) => item._id);
-        setToDelete([...toDelete, ...badIds]);
-        return;
-      }
-    } else {
-      // Not checked
-      if (value === "allBad") {
-        const badIds = badList.map((item) => item._id);
-
-        const deleteBad = toDelete.filter((_id) => !badIds.includes(_id));
-        setToDelete(deleteBad);
-        return;
-      }
-    }
   };
 
   console.log(toDelete);
