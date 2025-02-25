@@ -1,8 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Table = ({ taskList, switchTask, handleOnDelete }) => {
+  const [toDelete, setToDelete] = useState([]);
+
   const entryList = taskList.filter((item) => item.type === "entry");
   const badList = taskList.filter((item) => item.type === "bad");
+
+  // Function to select the checkbox
+
+  const handleOnSelect = (e) => {
+    const { checked, value } = e.target;
+
+    //  Entry List
+    if (checked) {
+      if (value === "allEntry") {
+        // get all ids from entrylist
+
+        const ids = entryList.map((item) => item._id);
+        setToDelete([...toDelete, ...ids]);
+        return;
+      }
+
+      setToDelete([...toDelete, value]);
+    } else {
+      // Not checked
+      if (value === "allEntry") {
+        const ids = entryList.map((item) => item._id);
+
+        const deletedEntry = toDelete.filter((_id) => !ids.includes(_id));
+        setToDelete(deletedEntry);
+        return;
+      }
+      setToDelete(toDelete.filter((_id) => _id !== value));
+    }
+    // console.log(checked, value);
+
+    //  Bad List
+
+    if (checked) {
+      if (value === "allBad") {
+        const badIds = badList.map((item) => item._id);
+        setToDelete([...toDelete, ...badIds]);
+        return;
+      }
+    } else {
+      // Not checked
+      if (value === "allBad") {
+        const badIds = badList.map((item) => item._id);
+
+        const deleteBad = toDelete.filter((_id) => !badIds.includes(_id));
+        setToDelete(deleteBad);
+        return;
+      }
+    }
+  };
+
+  console.log(toDelete);
 
   //   const totalBadHr =
   return (
@@ -11,9 +64,10 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
         <h3>Entry List</h3>
         <hr />
         <input
+          onChange={handleOnSelect}
           className="form-check-input"
           type="checkbox"
-          value=""
+          value="allEntry"
           id="entry-list"
         />
         <label htmlFor="entry-list">Select All</label>
@@ -27,8 +81,11 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
                   <td>
                     <div className="d-flex align-items-center">
                       <input
+                        onChange={handleOnSelect}
                         className="form-check-input me-2"
                         type="checkbox"
+                        value={item?._id}
+                        checked={toDelete.includes(item._id)}
                       />
                       {item.task}
                     </div>
@@ -58,9 +115,10 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
         <h3>Bad List</h3>
         <hr />
         <input
+          onChange={handleOnSelect}
           className="form-check-input"
           type="checkbox"
-          value=""
+          value="allBad"
           id="bad-list"
         />
         <label htmlFor="bad-list">Select All</label>
@@ -73,8 +131,11 @@ const Table = ({ taskList, switchTask, handleOnDelete }) => {
                   <td>
                     <div className="d-flex align-items-center">
                       <input
+                        onChange={handleOnSelect}
                         className="form-check-input me-2"
                         type="checkbox"
+                        value={item?._id}
+                        checked={toDelete.includes(item._id)}
                       />
                       {item.task}
                     </div>

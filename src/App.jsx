@@ -8,6 +8,7 @@ const hrsPerWeek = 24 * 7;
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+
   const [resp, setResp] = useState({});
 
   // Using useREf to render the elements once
