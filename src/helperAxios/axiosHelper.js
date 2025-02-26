@@ -44,3 +44,11 @@ export const patchTask = async (data) => {
 };
 
 // DELETE Method
+
+export const deleteTask = async (data) => {
+  const obj = {
+    method: "delete",
+    data,
+  };
+  return apiProcessor(obj);
+};

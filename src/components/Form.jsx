@@ -30,6 +30,7 @@ const Form = ({ addTaskList }) => {
             aria-label="First name"
             name="task"
             id="task"
+            required
           />
         </div>
         <div className="col-md-2">
@@ -41,6 +42,7 @@ const Form = ({ addTaskList }) => {
             aria-label="Last name"
             name="hours"
             min="1"
+            required
           />
         </div>
         <div className="col-md-4 d-grid">
