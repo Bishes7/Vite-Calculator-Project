@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const apiEP = "http://localhost:8000/api/v1/users";
+const apiEP = import.meta.env.PROD
+  ? "/api/v1/users"
+  : "http://localhost:8000/api/v1/users";
 
 // Using method, URL to minimize the code
 
